@@ -8,7 +8,6 @@ type TodoListProps = {
 export default function TodoList({ todos }: TodoListProps) {
 	return (
 		<section>
-			<h2>My Tasks</h2>
 			{todos.length === 0 ? (
 				<p>No tasks found.</p>
 			) : (
