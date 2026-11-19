@@ -93,7 +93,7 @@ hr {
 	border-radius: 18px;
 	background-color: white;
 	color: #183a67;
-	min-width: 500px;
+	min-width: 600px;
 }
 
 #tasks-heading {
@@ -114,4 +114,31 @@ hr {
 #weatherDetails p {
 	margin: 5px 10px;
 	flex: 0 0 calc(50% - 20px);
+}
+
+@media (max-width: 600px) {
+	#todoItem {
+		min-width: 100%;
+	}
+	#page {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 20px;
+	}
+}
+
+@media (max-width: 650px) {
+	#weatherDetails p {
+		flex: 0 0 100%;
+	}
+}
+@media (max-width: 600px) {
+	#weatherDetails p {
+		flex: 0 0 calc(50% - 20px);
+	}
+}
+@media (max-width: 400px) {
+	#weatherDetails p {
+		flex: 0 0 100%;
+	}
 }
