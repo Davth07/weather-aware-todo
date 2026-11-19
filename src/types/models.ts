@@ -9,7 +9,7 @@ export type Todo = {
 	userId: number;
 	title: string;
 	completed: boolean;
-	weatherSensitive?: boolean;
+	category: "indoor" | "outdoor" | "unspecified";
 };
 
 export type Weather = {

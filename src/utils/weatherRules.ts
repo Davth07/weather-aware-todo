@@ -1,3 +1,5 @@
+import type { Todo, Weather } from "../types/models";
+
 export function getWeatherCategory(code: number): string {
 	if (code === 1117) return "Snow Storm";
 	if ([1087, 1273, 1276, 1279, 1282].includes(code)) return "Thunderstorm";
@@ -30,4 +32,20 @@ export function getRecommendation(category: string, windy: boolean) {
 	if (windy) return "It is windy. Secure loose items.";
 	if (category === "Sunny") return "Good conditions for an outdoor task.";
 	return "Check the weather before going outside.";
+}
+
+export function getTaskRecommendation(
+	category: Todo["category"],
+	weather: Weather | null,
+): string {
+	if (category !== "outdoor") {
+		return "No outdoor weather check needed.";
+	}
+	if (!weather) {
+		return "Weather information unavailable.";
+	}
+	if (weather.precipitation > 0) {
+		return "Rain detected: consider rescheduling";
+	}
+	return "Check conditions before your outdoor activity";
 }

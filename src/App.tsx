@@ -93,6 +93,7 @@ function App() {
 		: "";
 
 	const filteredTodos = todos.filter((todo) => todo.userId === selectedUserId);
+
 	return (
 		<>
 			<main>
@@ -139,7 +140,7 @@ function App() {
 					{selectedUserId === null ? (
 						<p>Select a user to see their tasks.</p>
 					) : (
-						<TodoList todos={filteredTodos} />
+						<TodoList todos={filteredTodos} weather={weather} />
 					)}
 				</section>
 			</main>
