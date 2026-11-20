@@ -34,6 +34,9 @@ select {
 	margin-bottom: 10px;
 	width: 200px;
 }
+select:focus {
+	border: 2px solid #75b1ff;
+}
 label {
 	font-weight: bold;
 }
@@ -107,13 +110,41 @@ hr {
 	align-items: center;
 	flex-direction: row;
 	gap: 10px 0px;
-	padding: 0 20px;
 	text-align: center;
 }
 
 #weatherDetails p {
 	margin: 5px 10px;
 	flex: 0 0 calc(50% - 20px);
+}
+#todoItem input {
+	margin-right: 10px;
+}
+#todoItem input:hover {
+	cursor: pointer;
+}
+.task-filters {
+	display: flex;
+	justify-content: right;
+	width: 100%;
+	gap: 10px;
+	margin-bottom: 20px;
+	padding-right: 70px;
+}
+.task-filters button {
+	padding: 10px;
+	border-radius: 15px;
+	border: 2px solid #183a67;
+	background-color: #fff;
+}
+.task-filters button:hover {
+	cursor: pointer;
+	background-color: #183a67;
+	color: #fff;
+	transition: 0.2s;
+}
+.task-filters button:active {
+	transform: scale(1.15);
 }
 
 @media (max-width: 600px) {
@@ -140,5 +171,14 @@ hr {
 @media (max-width: 400px) {
 	#weatherDetails p {
 		flex: 0 0 100%;
+	}
+	.task-filters {
+		flex-direction: column;
+	}
+}
+@media (max-width: 700px) {
+	.task-filters {
+		justify-content: center;
+		padding: 0;
 	}
 }

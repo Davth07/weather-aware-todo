@@ -38,14 +38,21 @@ export function getTaskRecommendation(
 	category: Todo["category"],
 	weather: Weather | null,
 ): string {
+	const condition = weather?.condition.toLocaleLowerCase() || "";
 	if (category !== "outdoor") {
 		return "No outdoor weather check needed.";
 	}
 	if (!weather) {
 		return "Weather information unavailable.";
 	}
-	if (weather.precipitation > 0) {
-		return "Rain detected: consider rescheduling";
+	if (weather.precipitation > 0.05) {
+		return "Precipitation detected: consider rescheduling.";
+	}
+	if (condition.includes("snow")) {
+		return "Snow detected: consider rescheduling.";
+	}
+	if (condition.includes("rain")) {
+		return "Rain detected: consider rescheduling.";
 	}
 	return "Check conditions before your outdoor activity";
 }

@@ -22,6 +22,15 @@ function App() {
 	const [dataError, setDataError] = useState("");
 
 	const [todos, setTodos] = useState<Todo[]>([]);
+	const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+
+	function toggleTodo(todoId: number) {
+		setTodos((currentTodos) =>
+			currentTodos.map((todo) =>
+				todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
+			),
+		);
+	}
 
 	useEffect(() => {
 		let active = true;
@@ -46,7 +55,9 @@ function App() {
 				}
 			}
 		}
+
 		loadWeather();
+
 		return () => {
 			active = false;
 		};
@@ -81,18 +92,32 @@ function App() {
 				}
 			}
 		}
+
 		loadData();
+
 		return () => {
 			active = false;
 		};
 	}, []);
+
 	const weatherCategory = weather ? getWeatherCategory(weather.code) : "";
 	const isWindy = weather ? weather.windSpeed >= 25 : false;
 	const recommendation = weather
 		? getRecommendation(weatherCategory, isWindy)
 		: "";
 
-	const filteredTodos = todos.filter((todo) => todo.userId === selectedUserId);
+	const filteredTodos = todos.filter((todo) => {
+		if (todo.userId !== selectedUserId) {
+			return false;
+		}
+		if (filter === "active") {
+			return !todo.completed;
+		}
+		if (filter === "completed") {
+			return todo.completed;
+		}
+		return true;
+	});
 
 	return (
 		<>
@@ -137,10 +162,19 @@ function App() {
 				</section>
 				<section id="tasks">
 					<h2 id="tasks-heading">Tasks</h2>
+					<div className="task-filters">
+						<button onClick={() => setFilter("all")}>All</button>
+						<button onClick={() => setFilter("active")}>Active</button>
+						<button onClick={() => setFilter("completed")}>Completed</button>
+					</div>
 					{selectedUserId === null ? (
 						<p>Select a user to see their tasks.</p>
 					) : (
-						<TodoList todos={filteredTodos} weather={weather} />
+						<TodoList
+							todos={filteredTodos}
+							weather={weather}
+							onToggleTodo={toggleTodo}
+						/>
 					)}
 				</section>
 			</main>
