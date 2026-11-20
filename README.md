@@ -75,4 +75,4 @@ Adding creating and deleting tasks.
 Adding sorting tasks, searching tasks.
 Adding weather for more days than just the current weather.
 Adding a input field for city instead of a dropdown menu.
-
+Adding a dropdown menu to change category for tasks.
